@@ -4,6 +4,7 @@ const form = document.querySelector(".form");
 
 form.addEventListener('submit', createPromises);
 
+//ф-ція створює проміси
 function createPromises(e) {
   e.preventDefault();
   const delay = Number(form.delay);
