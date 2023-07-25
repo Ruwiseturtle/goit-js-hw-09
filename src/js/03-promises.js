@@ -4,7 +4,7 @@ const form = document.querySelector(".form");
 
 form.addEventListener('submit', createPromises);
 
-//ф-ція створює проміси
+//ф-ція створює промісів стільки, скільки користувач вводе в поле amount
 function createPromises(e) {
   e.preventDefault();
   const delay = Number(form.delay);
