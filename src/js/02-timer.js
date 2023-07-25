@@ -27,7 +27,7 @@ const options = {
   },
 };
 
-const flatpickr = require('flatpickr');
+// const flatpickr = require('flatpickr');
 flatpickr('input[type="text"]', options);
 
 //при клікі на кнопку запускаємо таймер, який кожну секунду
