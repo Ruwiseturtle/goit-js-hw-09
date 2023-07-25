@@ -7,6 +7,14 @@ form.addEventListener('submit', createPromises);
 //ф-ція викликає ф-цію створення промісів стільки, скільки користувач вводе в поле amount 
 function createPromises(e) {
   e.preventDefault();
+
+  if (Number(form.delay.value) < 0 || Number(form.step.value) < 0 ||
+    Number(form.amount.value) < 0) {
+    Notiflix.Notify.failure(`❌ All values must be greater than 0`);
+    return;
+  }
+
+  
   let delay = Number(form.delay.value);
 
   for (let i = 1; i <= form.amount.value; i += 1) {
