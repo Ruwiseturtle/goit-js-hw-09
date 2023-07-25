@@ -43,10 +43,20 @@ refs.startBtn.addEventListener('click', () => {
 function countdown() {
   const differentCurrentTime = convertMs(futureData - Date.now()); 
   
-  refs.days.textContent = addLeadingZero(differentCurrentTime.days);
-  refs.hours.textContent = addLeadingZero(differentCurrentTime.hours);
-  refs.minutes.textContent = addLeadingZero(differentCurrentTime.minutes);
-  refs.seconds.textContent = addLeadingZero(differentCurrentTime.seconds);
+  let days = addLeadingZero(differentCurrentTime.days);
+  let hours = addLeadingZero(differentCurrentTime.hours);
+  let minutes = addLeadingZero(differentCurrentTime.minutes);
+  let seconds = addLeadingZero(differentCurrentTime.seconds);
+
+  if (days === "00" && hours === "00"
+      && minutes === "00" && seconds === "00") {
+    clearTimeout(timerId);    
+ }
+  
+  refs.days.textContent = days;
+  refs.hours.textContent = hours;
+  refs.minutes.textContent = minutes;
+  refs.seconds.textContent = seconds;
 }
 
 //якщо значення дати та часу введенні меньші або рівні за поточні, 

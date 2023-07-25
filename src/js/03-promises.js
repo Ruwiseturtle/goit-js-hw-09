@@ -4,13 +4,15 @@ const form = document.querySelector(".form");
 
 form.addEventListener('submit', createPromises);
 
-//ф-ція створює промісів стільки, скільки користувач вводе в поле amount
+//ф-ція викликає ф-цію створення промісів стільки, скільки користувач вводе в поле amount 
 function createPromises(e) {
   e.preventDefault();
-  const delay = Number(form.delay);
+  let delay = Number(form.delay.value);
 
   for (let i = 1; i <= form.amount.value; i += 1) {
-    
+
+    delay = i === 1 ? delay : delay + Number(form.step.value);
+
     createPromise(i, delay)
       .then(({ position, delay }) => {
         Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -24,7 +26,7 @@ function createPromises(e) {
 };
 
 
-
+//ф-цыя створює проміс
 function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;
   const promiseObj = { position, delay };
