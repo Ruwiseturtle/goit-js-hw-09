@@ -9,12 +9,15 @@ const refs = {
   hours: document.querySelector('.timer [data-hours]'),
   minutes: document.querySelector('.timer [data-minutes]'),
   seconds: document.querySelector('.timer [data-seconds]'),
+  reset: document.querySelector('button[data-reset]'),
 };
 
 //робимо кнопку start одразу неактивною
 refs.startBtn.disabled = true; //кнопку старт робимо неактивною
+refs.reset.disabled = true;   //кнопку reset робимо неактивною
 let futureData = null;         //вибрана дата в календарі в мілісекундах
 let timerId = null;            //таймер 
+
 
 const options = {
   enableTime: true,
@@ -35,6 +38,8 @@ flatpickr('input[type="text"]', options);
 refs.startBtn.addEventListener('click', () => {
   timerId = setInterval(countdown, 1000);
   refs.startBtn.disabled = true;
+  refs.inputCalendar.disabled = true;
+  refs.reset.disabled = false; //кнопку reset робимо активною
 })
 
 //ф-ція рахує, скільки залишилось часу (різниця між датою в календарі та поточною датою) в мілісекундах
@@ -51,6 +56,9 @@ function countdown() {
   if (days === "00" && hours === "00"
       && minutes === "00" && seconds === "00") {
     clearTimeout(timerId);    
+
+    refs.reset.disabled = true;
+    refs.inputCalendar.disabled = false;
  }
   
   refs.days.textContent = days;
@@ -106,4 +114,21 @@ function convertMs(ms) {
 
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
+}
+
+//============для кнопки reset============
+
+refs.reset.addEventListener('click', dataReset);
+
+function dataReset() {
+  clearTimeout(timerId);
+  refs.inputCalendar.textContent = "";
+
+  refs.days.textContent = '00';
+  refs.hours.textContent = '00';
+  refs.minutes.textContent = '00';
+  refs.seconds.textContent = '00';
+
+  refs.reset.disabled = true;
+  refs.inputCalendar.disabled = false;
 }
